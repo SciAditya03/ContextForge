@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Test output
+test-results/
+playwright-report/
+
+# ContextForge runtime data: uploads, extracted sources, generated packages, caches, keys
+data/
+backend/data/
+*.db
+*.db-wal
+*.db-shm
+.secret.key
+contextforge-output/
+samples/dist/
+
+# Secrets / local env
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
