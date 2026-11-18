@@ -1,0 +1,44 @@
+# ContextForge — local deployment.
+#   cp .env.example .env   # optional: add provider keys
+#   docker compose up --build
+# UI: http://localhost:3000   API: http://localhost:8000/docs
+services:
+  api:
+    build: ./backend
+    image: contextforge-api:latest
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      CONTEXTFORGE_DATA_DIR: /data
+      CONTEXTFORGE_CORS_ORIGINS: ${CONTEXTFORGE_CORS_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+    ports:
+      # bound to localhost by default; set CONTEXTFORGE_API_TOKEN before exposing it more widely
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - contextforge-data:/data
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+
+  web:
+    build: ./frontend
+    image: contextforge-web:latest
+    environment:
+      # URL the browser uses to reach the API (published port above)
+      CONTEXTFORGE_PUBLIC_API_URL: ${CONTEXTFORGE_PUBLIC_API_URL:-http://localhost:8000}
+      CONTEXTFORGE_PUBLIC_API_TOKEN: ${CONTEXTFORGE_PUBLIC_API_TOKEN:-}
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  contextforge-data:
