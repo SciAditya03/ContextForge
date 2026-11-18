@@ -1,0 +1,27 @@
+{
+  "name": "team-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "next": "14.2.15",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "zustand": "4.5.5",
+    "zod": "3.23.8",
+    "lodash": "4.17.20",
+    "date-fns": "3.6.0"
+  },
+  "devDependencies": {
+    "typescript": "5.6.3",
+    "@types/react": "18.3.11",
+    "tailwindcss": "3.4.14",
+    "vitest": "2.1.3"
+  }
+}
